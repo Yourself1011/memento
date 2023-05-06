@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const MomentList = ({ className = "" }) => {
   const moments = JSON.parse(localStorage.getItem("moments") as string);
   const navigate = useNavigate();
-  
+
   return (
     <table className={`${className} pages-container`}>
       <tr>

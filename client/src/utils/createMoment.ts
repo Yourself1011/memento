@@ -8,17 +8,17 @@ export function createMoment() {
             "moments",
             JSON.stringify([
                 {
-                    name: "Untitled Moment",
+                    name: `Untitled Moment 0`,
                     text: "",
-                    createdDate: Date.now(),
+                    createdDate: new Date().toJSON().slice(0,10).replace(/-/g,'/')
                 },
             ] as Moment[])
         );
     } else {
         moments.push({
-            name: "Untitled Moment",
+            name: `Untitled Moment ${moments.length}`,
             text: "",
-            createdDate: Date.now(),
+            createdDate: new Date().toJSON().slice(0,10).replace(/-/g,'/')
         });
         localStorage.setItem("moments", JSON.stringify(moments));
     }
