@@ -7,7 +7,7 @@ type Card = {
     answer: string
 }
 
-let cardIndex = 0
+
 const cards: Card[] = [
     {
         question: 'What is the speed of sound at regular atmospheric pressure and temperature?',
@@ -36,13 +36,11 @@ const Flashcards = () => {
 
     const handleResponseClick = () => {
         setFlashcardOpen(false)
-        cardIndex += 1
-        if (cardIndex >= cards.length) {
-            setCardsAllCompleted(true)
-        }
-        else {
-            setCurrentCard(cards[cardIndex])
-        }
+
+        cards.push(cards.shift()!)
+        
+        setCurrentCard(cards[0])
+
     }
 
     const SpacedRepetitonResponse = ({ text } : { text: string}) => {
