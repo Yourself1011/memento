@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Tesseract from 'tesseract.js';
 
 const OCR = () => {
@@ -14,15 +14,12 @@ const OCR = () => {
   
     Tesseract.recognize(
       imagePath,'eng',
-      { 
-        // logger: m => console.log(m)
-      }
+      {}
     )
     .catch (err => {
       console.error(err);
     })
     .then(result => {
-      // Get Confidence score
       setConfidence(result?.data.confidence)
       setText(result?.data.text);
   
@@ -30,20 +27,29 @@ const OCR = () => {
   }
 
   return (
-    <div className="App">
-      <main className="App-main">
-        <h3>Actual image uploaded</h3>
-        <img 
-           src={imagePath} className="App-logo" alt="logo"/>
-        
-          <h3>Extracted text</h3>
-        <div className="text-box">
-          <p> asdf {text} </p>
-          <p>confidence: {confidence}</p>
+    <div className='w-full'>
+      <div className='w-full bg-accentbutyoucanbarelyseeit p-6'>
+        <h1>OCR</h1>
+        <p className='flex items-center'>Convert a photo of a whiteboard, textbook, or scientific document into usable text</p>
+      </div>
+      <div className='p-10'>
+        <div className='container'>
+          <h1>Image Upload</h1>
+          {imagePath ? <img src={imagePath} alt="logo"/> : <p>No image found, upload one below</p>}
+          <input className='mt-4' type="file" accept="image/*" onChange={handleChange} />
+          <div className='flex items-center mt-4 gap-2'>
+            <button className={`bg-accent text-white hover:bg-accentlight ${imagePath ? "" : "no"}`} onClick={imagePath ? handleClick : () => {return}}> Extract text</button>
+            <button className={imagePath ? "" : "no"} onClick={imagePath ? () => {location.reload()} : () => {return}}> Clear</button>
+          </div>
         </div>
-        <input type="file" onChange={handleChange} />
-        <button onClick={handleClick} style={{height:50}}> convert to text</button>
-      </main>
+        <div className='container mt-8'>
+          <h1>Extracted text</h1>
+          <div>
+            <p><span className='font-bold'>Text</span>: {text ? text : "None"} </p>
+            <p><span className='font-bold'>Confidence</span>: {confidence ? confidence : "None"}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

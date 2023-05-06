@@ -56,15 +56,20 @@ a {
   }
 }
 
-button {
+button, input::file-selector-button {
   background-color: theme('colors.accentbutyoucanbarelyseeit');
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: 1px solid theme('colors.accentsuperlight');
   transition: .3s ease;
-
+  cursor: pointer;
+  
   &:hover {
     background-color: darken(#eaebfc, 5%);
   }
 }
-
+input {
+}
+.no {
+  cursor: not-allowed !important;
+}
