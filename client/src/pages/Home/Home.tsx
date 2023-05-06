@@ -1,11 +1,12 @@
 import './Home.scss'
+import cohere from '../../assets/cohere.png'
 
 const Home = () => {
   return (
     <div className='w-full home'>
       <div className='w-full bg-accentbutyoucanbarelyseeit p-6'>
         <h1>Home</h1>
-        <p>Amonus: an ai-powered flashcard generator</p>
+        <p className='flex items-center'>Memento: an ai-powered flashcard generator, powered by <img id='cohere' src={cohere} alt='cohere'></img> </p>
       </div>
       <div className='p-16'>
         <div className='flex gap-10'>
