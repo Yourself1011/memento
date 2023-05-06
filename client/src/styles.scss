@@ -30,3 +30,15 @@ a {
   }
 }
 
+button {
+  background-color: theme('colors.accentbutyoucanbarelyseeit');
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid theme('colors.accentsuperlight');
+  transition: .3s ease;
+
+  &:hover {
+    background-color: darken(#eaebfc, 5%);
+  }
+}
+
