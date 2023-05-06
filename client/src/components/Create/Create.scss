@@ -1,9 +1,26 @@
 
-div a.create {
+.create {
+  .drawer {
+    transition: all 0.2s ease-in-out;
+    transform-origin: bottom;
+    a {
+      margin: 0;
+      border-radius: 0;
+    }
+    &.hide {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    &.show {
+      opacity: 100%;
+      transform: scaleY(1);
+    }
+  }
+  a.highlight {
     margin-top: auto;
     text-align: center;
-    width: 100%;
     justify-content: center;
+    width: 100%;
     cursor: pointer;
     transition: .3s ease;
     border-radius: 0px;
@@ -14,3 +31,4 @@ div a.create {
       background-color: darken(#e8ebfe, 25%);
     }
   }
+}
