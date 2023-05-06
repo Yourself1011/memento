@@ -24,8 +24,9 @@ const Home = () => {
         <div className="w-full home">
             <div className="w-full bg-accentbutyoucanbarelyseeit p-6">
                 <h1>Home</h1>
+                <p>⚡ Smarter flashcards, Smarter learning.</p>
                 <p className="flex items-center">
-                    Memento: an ai-powered flashcard generator, featuring{" "}
+                    Memento is an ai-powered flashcard generator, featuring{" "}
                     <img
                         id="cohere"
                         className="h-8"
@@ -55,8 +56,8 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="container w-full mt-10">
-                    <h1>Study "insert name of flashcards"</h1>
-                    <p>Study your ai-generated flashcards</p>
+                    <h1>Study Flashcards</h1>
+                    <p>Study your ai-generated flashcards with the built-in spaced repitition system</p>
                     <button className="mt-4" onClick={() => navigate('/cards')}>Study</button>
                 </div>
                 <div className="container w-full mt-10">
