@@ -30,6 +30,10 @@ const Home = () => {
           <p>Moments that you've created and worked on</p>
           <div className='pages-container mt-4'>
             <div>
+              <p>Name</p>
+              <p>Date Created</p>
+            </div>
+            <div>
               <a>Schindler's List Reflection</a>
               <p>01/01/23</p>
             </div>

@@ -22,7 +22,7 @@ h1 {
 }
 
 .pages-container {
-  div {
+  div:not(:first-child) {
     border-bottom: 1px solid #e2e8f0;
     padding: 0.25rem;
     display: flex;
@@ -36,6 +36,15 @@ h1 {
     p {
       color: #999;
     }
+  }
+  div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #999;
+    text-transform: uppercase;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 }
 

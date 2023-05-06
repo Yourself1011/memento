@@ -13,9 +13,9 @@ function Sidebar() {
           <GrHomeRounded />
           Home
         </NavLink>
-        <NavLink to='/pages'>
+        <NavLink to='/moments'>
           <AiOutlineUnorderedList/>
-          Pages
+          Moments
         </NavLink>
         <NavLink to="/edit/0">
           <GrDocument />
