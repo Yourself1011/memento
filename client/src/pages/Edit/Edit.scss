@@ -1,0 +1,14 @@
+.edit {
+    flex-grow: 10000;
+    height: 100svh;
+    textarea {
+        border: none;
+        resize: none;
+        width: 100%;
+        height: 100svh;
+        padding: 4rem;
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}
