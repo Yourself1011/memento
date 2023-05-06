@@ -2,11 +2,13 @@ import { useState } from "react";
 import { GrDocument } from "react-icons/gr";
 import { BsCardList } from "react-icons/bs";
 import { createMoment } from "../../utils/createMoment";
+import CreateFlashcard from "../CreateFlashcard/CreateFlashcard";
 import { useNavigate } from "react-router-dom";
 import "./Create.scss";
 
 function Create() {
   const [display, setDisplay] = useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -24,7 +26,9 @@ function Create() {
           <GrDocument />
           New Moment
         </a>
-        <a className="menuItems">
+        <a className="menuItems" onClick={() => {
+            setOpen(true)
+        }}>
           <BsCardList />
           New Flashcard
         </a>
@@ -32,6 +36,7 @@ function Create() {
       <a className="highlight" onClick={() => setDisplay(!display)}>
         + Create
       </a>
+      <CreateFlashcard {...{ open, setOpen }} />
     </div>
   );
 }
