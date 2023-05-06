@@ -51,7 +51,7 @@ const OCR = () => {
           </div>
           <div className='flex gap-2 mt-4'>
             <button className={imagePath ? "" : "no"} onClick={() => {navigator.clipboard.writeText(text || "")}}>Copy text</button>
-            <button className={imagePath ? "" : "no"}>Create new page with text</button>
+            <button className={imagePath ? "" : "no"}>Create new Moment with text</button>
           </div>
         </div>
       </div>
