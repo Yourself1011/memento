@@ -13,6 +13,9 @@ export default {
         accentbutyoucanbarelyseeit: "#e9ebfd"
       }
     },
+    fontWeight: {
+      bold: '600'
+    }
   },
   plugins: [],
 }
