@@ -1,16 +1,33 @@
 import { GrDocument, GrHomeRounded } from "react-icons/gr";
 import { BsCardList } from "react-icons/bs";
 import { AiOutlineUnorderedList } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Create from "../Create/Create";
+import { useEffect, useState } from "react";
 import "./Sidebar.scss";
 
 function Sidebar() {
+    const navigate = useNavigate();
+    const [lastEdited, setLastEdited] = useState(
+        localStorage.getItem("lastEdited") ?? "0"
+    );
+
+    function storageChange() {
+        setLastEdited(localStorage.getItem("lastEdited") ?? lastEdited);
+        console.log("among");
+    }
+
+    useEffect(() => {
+        storageChange();
+        window.addEventListener("storage", storageChange);
+        return window.removeEventListener("storage", storageChange);
+    }, [navigate]);
+
     return (
         <div className="border-r-[#e7e7ef] border-r-2 flex flex-col justify-between shrink-0 sidebar">
             <div className="px-6">
                 <p className="font-bold text-2xl py-6 flex items-center justify-between">
-                    Amonus <p>logo</p>
+                    Memento <p>logo</p>
                 </p>
                 <NavLink to="/">
                     <GrHomeRounded />
@@ -20,7 +37,7 @@ function Sidebar() {
                     <AiOutlineUnorderedList />
                     Moments
                 </NavLink>
-                <NavLink to="/edit/0">
+                <NavLink to={`/edit/${lastEdited}`}>
                     <GrDocument />
                     Edit
                 </NavLink>

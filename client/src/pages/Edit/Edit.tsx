@@ -21,7 +21,7 @@ const Edit = () => {
             ] as Moment[])
         );
     }
-    localStorage.setItem("lastedited", id.toString());
+    localStorage.setItem("lastEdited", id.toString());
 
     const [text, setText] = useState<string>(moments[id].text);
     const [name, setName] = useState<string>(moments[id].name);
@@ -34,10 +34,10 @@ const Edit = () => {
 
     return (
         <div className="edit">
-            <input 
+            <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className='name-input'
+                className="name-input"
             />
             <textarea
                 value={text}
