@@ -5,13 +5,11 @@ import { useParams } from "react-router-dom";
 
 const Edit = () => {
     const { id: rawId } = useParams();
-    console.log(rawId);
-    let id = rawId ? parseInt(rawId) : 0;
+    const id = rawId ? parseInt(rawId) : 0;
 
-    const moments = JSON.parse(localStorage.getItem("moments") ?? "");
+    const moments = JSON.parse(localStorage.getItem("moments") as string);
 
-    if (!moments) {
-        id = 0;
+    if (!moments || !moments[id]) {
         localStorage.setItem(
             "moments",
             JSON.stringify([
