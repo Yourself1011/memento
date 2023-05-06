@@ -44,9 +44,14 @@ const OCR = () => {
         </div>
         <div className='container mt-8'>
           <h1>Extracted text</h1>
-          <div>
+          <p className='font-bold'>Note: the extracted text may not be perfect</p>
+          <div className='mt-4'>
             <p><span className='font-bold'>Text</span>: {text ? text : "None"} </p>
             <p><span className='font-bold'>Confidence</span>: {confidence ? confidence : "None"}</p>
+          </div>
+          <div className='flex gap-2 mt-4'>
+            <button className={imagePath ? "" : "no"} onClick={() => {navigator.clipboard.writeText(text || "")}}>Copy text</button>
+            <button className={imagePath ? "" : "no"}>Create new page with text</button>
           </div>
         </div>
       </div>
