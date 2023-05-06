@@ -1,10 +1,10 @@
 .sidebar {
   height: 100vh;
   position: sticky;
-  gap: 0.5rem;
   width: 20%;
 
   a {
+    margin-top: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -21,5 +21,19 @@
       background-color: #e8ebfe;
       border: 1px solid darken(#e8ebfe, 10%);
     }
+  }
+}
+.create {
+  margin-top: auto;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s ease;
+  color: white;
+  background-color: darken(#e8ebfe, 30%) !important;
+
+  &:hover {
+    background-color: darken(#e8ebfe, 25%) !important;
   }
 }
