@@ -3,12 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./Flashcards.scss";
 import { Card } from "../../types/card";
 
-type Card = {
-    question: string,
-    answer: string
-    stage: number
-}
-
 
 // const cards: Card[] = [
 //     {
