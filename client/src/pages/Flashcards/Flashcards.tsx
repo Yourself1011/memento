@@ -83,7 +83,10 @@ const Flashcards = () => {
         </div>
       ) : (
         <div className="container">
-          <h2>{currentCard.question}</h2>
+          <div>
+            {currentCard?.file && <p>{currentCard.file}</p>}
+            <h2>{currentCard.question}</h2>
+          </div>
           <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
             {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
           </p>

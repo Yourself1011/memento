@@ -78,7 +78,13 @@ const Edit = () => {
               "cards",
               JSON.stringify(
                 cards.concat(
-                  JSON.parse((await generate(text)).generations[0].text)
+                  (
+                    JSON.parse(
+                      (await generate(text)).generations[0].text
+                    ) as Card[]
+                  ).map((x) => {
+                    return { ...x, file: name };
+                  })
                 )
               )
             );
