@@ -15,11 +15,12 @@ export function createMoment() {
             ] as Moment[])
         );
     } else {
-        moments.append({
+        moments.push({
             name: "Untitled Moment",
             text: "",
             createdDate: Date.now(),
         });
         localStorage.setItem("moments", JSON.stringify(moments));
     }
+    return moments.length - 1;
 }

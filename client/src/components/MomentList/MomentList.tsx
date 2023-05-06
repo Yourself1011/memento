@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
-import { Moment } from '../../types/moment';
+import { Link } from "react-router-dom";
+import { Moment } from "../../types/moment";
 
-const MomentList = ({className=''}) => {
-
+const MomentList = ({ className = "" }) => {
   const moments = JSON.parse(localStorage.getItem("moments") as string);
 
   return (
@@ -22,7 +21,7 @@ const MomentList = ({className=''}) => {
         }) : <p>No moments found</p>
       }
     </div>
-)
-}
+  );
+};
 
-export default MomentList
+export default MomentList;
