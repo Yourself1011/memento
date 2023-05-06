@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home.tsx";
 import Edit from "./pages/Edit/Edit.tsx";
 import Moments from "./pages/Moments.tsx";
 import { Routes, Route } from "react-router-dom";
+import Flashcards from "./pages/Flashcards/Flashcards.tsx";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/edit/:id" element={<Edit />} />
                 <Route path="/moments" element={<Moments />} />
+                <Route path="/cards" element={<Flashcards />} />
             </Routes>
         </main>
     );
