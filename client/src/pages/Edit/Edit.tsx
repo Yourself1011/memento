@@ -2,14 +2,22 @@ import "./Edit.scss";
 import { useState, useEffect } from "react";
 import { Moment } from "../../types/moment";
 import { useParams } from "react-router-dom";
-import { createMoment } from "../../utils/createMoment";
-import { useNavigate } from "react-router-dom";
+import { Card } from "../../types/card";
+import { AiOutlineLoading } from "react-icons/ai";
+import { generate } from "../../cohere";
 
 const Edit = () => {
+  const [loading, setLoading] = useState(false);
   const { id: rawId } = useParams();
   const id = rawId ? parseInt(rawId) : 0;
 
-  const navigate = useNavigate();
+  const rawCards: string = localStorage.getItem("cards") ?? "[]";
+
+  if (!rawCards) {
+    localStorage.setItem("cards", "[]");
+  }
+
+  const cards: Card[] = JSON.parse(rawCards);
 
   const moments = JSON.parse(localStorage.getItem("moments") as string);
 
@@ -20,7 +28,7 @@ const Edit = () => {
         {
           name: "Untitled Moment",
           text: "",
-          createdDate: new Date().toJSON().slice(0,10).replace(/-/g,'/'),
+          createdDate: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
         },
       ] as Moment[])
     );
@@ -61,7 +69,26 @@ const Edit = () => {
         </div>
         <button onClick={() => navigate('/moments')}>Back to Moments</button>
       </div> */}
-      <button className='mb-16 font-bold text-xl'>⚡ Generate Flashcards</button>
+      <button
+        className={`mb-8 font-bold text-xl ${loading ? "show no" : "hide"}`}
+        onClick={async () => {
+          if (!loading) {
+            setLoading(true);
+            localStorage.setItem(
+              "cards",
+              JSON.stringify(
+                cards.concat(
+                  JSON.parse((await generate(text)).generations[0].text)
+                )
+              )
+            );
+            setLoading(false);
+          }
+        }}
+        disabled={loading}
+      >
+        ⚡ Generate Flashcards <AiOutlineLoading />
+      </button>
     </div>
   );
 };

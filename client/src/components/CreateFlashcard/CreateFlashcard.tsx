@@ -49,6 +49,7 @@ function CreateFlashcard({ open, setOpen }: CreateFlashcardProps) {
                   cards.push({
                     question: front,
                     answer: back,
+                    stage: 3,
                   });
                   localStorage.setItem("cards", JSON.stringify(cards));
                   setFront("");

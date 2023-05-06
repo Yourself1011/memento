@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./Flashcards.scss";
 import { Card } from "../../types/card";
 
-
 // const cards: Card[] = [
 //     {
 //         question: 'What is the speed of sound at regular atmospheric pressure and temperature?',
@@ -39,28 +38,24 @@ const Flashcards = () => {
   };
 
   const handleResponseClick = () => {
-    const index = cards.findIndex(c => c.question === currentCard.question)!
-    const difference = cards[index].stage - 1
+    const index = cards.findIndex((c) => c.question === currentCard.question)!;
+    const difference = cards[index].stage - 1;
     if (difference <= 0) {
-        cards.splice(index, 1)
+      cards.splice(index, 1);
+    } else {
+      cards[index].stage = difference;
     }
 
-    else {
-        cards[index].stage = difference
-    }
+    setFlashcardOpen(false);
 
-    setFlashcardOpen(false)
-    
-    const newCard = cards?.[Math.floor(Math.random() * cards.length)]
+    const newCard = cards?.[Math.floor(Math.random() * cards.length)];
 
     if (!newCard) {
-        setCardsAllCompleted(true)
+      setCardsAllCompleted(true);
+    } else {
+      setCurrentCard(newCard);
     }
-
-    else {
-        setCurrentCard(newCard)
-    }
-}
+  };
 
   const SpacedRepetitonResponse = ({ text }: { text: string }) => {
     return (
@@ -73,37 +68,45 @@ const Flashcards = () => {
     );
   };
 
-    return (
-        <div className="flashcards">
-            <div className='w-full bg-accentbutyoucanbarelyseeit p-6'>
-                <h1>Flashcards</h1>
-                <p className='flex items-center'>Review and remember by studying flashcards</p>
-            </div>
-            { cardsAllCompleted
-                ? <div className="container">
-                    <h2>You've completed all of your cards!</h2>
-                    <button onClick={() => navigate('/edit')}>Create more cards</button>
-                </div>
-                : <div className="container">
-                    <h2>{currentCard.question}</h2>
-                    <p className={`answer ${flashcardOpen ? "" : "closed"}`}>{flashcardOpen ? currentCard.answer : "(Answer will appear here)"}</p>
-                    
-                    { !flashcardOpen 
-                        ? <div>
-                            <button className='w-full' onClick={handleShowButtonClick}>Show answer</button>
-                        </div>
-                        : <div className='w-full flex flex-col'>
-                            <div className="srsbox">
-                                <SpacedRepetitonResponse text="Skip" />
-                                <SpacedRepetitonResponse text="Forgot" />
-                                <SpacedRepetitonResponse text="Recalled" />
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
+  return (
+    <div className="flashcards">
+      <div className="w-full bg-accentbutyoucanbarelyseeit p-6">
+        <h1>Flashcards</h1>
+        <p className="flex items-center">
+          Review and remember by studying flashcards
+        </p>
+      </div>
+      {cardsAllCompleted ? (
+        <div className="container">
+          <h2>You've completed all of your cards!</h2>
+          <button onClick={() => navigate("/edit")}>Create more cards</button>
         </div>
-    );
+      ) : (
+        <div className="container">
+          <h2>{currentCard.question}</h2>
+          <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
+            {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
+          </p>
+
+          {!flashcardOpen ? (
+            <div>
+              <button className="w-full" onClick={handleShowButtonClick}>
+                Show answer
+              </button>
+            </div>
+          ) : (
+            <div className="w-full flex flex-col">
+              <div className="srsbox">
+                <SpacedRepetitonResponse text="Skip" />
+                <SpacedRepetitonResponse text="Forgot" />
+                <SpacedRepetitonResponse text="Recalled" />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Flashcards;

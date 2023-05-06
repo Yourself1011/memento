@@ -10,7 +10,7 @@
         border: none;
         resize: none;
         flex-grow: 10000;
-        padding-top: 1rem;
+        padding: 1rem 0;
         &:focus-visible {
             outline: none;
         }
@@ -23,5 +23,22 @@
         &:focus-visible {
             outline: none;
         }
+    }
+    button svg {
+        display: inline;
+        margin-left: 1rem;
+        animation: spin 2s ease-in-out infinite;
+    }
+    button.hide svg {
+        display: none;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(-45deg)
+    }
+    to {
+        transform: rotate(315deg)
     }
 }
