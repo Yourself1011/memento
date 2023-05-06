@@ -30,6 +30,8 @@ const Flashcards = () => {
 
   const cards: Card[] = JSON.parse(rawCards);
 
+  console.log(cards)
+
   const [currentCard, setCurrentCard] = useState<Card>(cards[0]);
   const [cardsAllCompleted, setCardsAllCompleted] = useState(false);
 
@@ -76,38 +78,40 @@ const Flashcards = () => {
           Review and remember by studying flashcards
         </p>
       </div>
-      {cardsAllCompleted ? (
-        <div className="container">
-          <h2>You've completed all of your cards!</h2>
-          <button onClick={() => navigate("/edit")}>Create more cards</button>
-        </div>
-      ) : (
-        <div className="container">
-          <div>
-            {currentCard?.file && <p>{currentCard.file}</p>}
-            <h2>{currentCard.question}</h2>
+      {(cards === undefined || cards.length === 0) ? <p className='text-left'>No cards found</p> : 
+        cardsAllCompleted ? (
+          <div className="container">
+            <h2>You've completed all of your cards!</h2>
+            <button onClick={() => navigate("/edit")}>Create more cards</button>
           </div>
-          <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
-            {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
-          </p>
-
-          {!flashcardOpen ? (
+        ) : (
+          <div className="container">
             <div>
-              <button className="w-full" onClick={handleShowButtonClick}>
-                Show answer
-              </button>
+              {currentCard?.file && <p>{currentCard.file}</p>}
+              <h2>{currentCard.question}</h2>
             </div>
-          ) : (
-            <div className="w-full flex flex-col">
-              <div className="srsbox">
-                <SpacedRepetitonResponse text="Skip" />
-                <SpacedRepetitonResponse text="Forgot" />
-                <SpacedRepetitonResponse text="Recalled" />
+            <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
+              {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
+            </p>
+  
+            {!flashcardOpen ? (
+              <div>
+                <button className="w-full" onClick={handleShowButtonClick}>
+                  Show answer
+                </button>
               </div>
-            </div>
-          )}
-        </div>
-      )}
+            ) : (
+              <div className="w-full flex flex-col">
+                <div className="srsbox">
+                  <SpacedRepetitonResponse text="Skip" />
+                  <SpacedRepetitonResponse text="Forgot" />
+                  <SpacedRepetitonResponse text="Recalled" />
+                </div>
+              </div>
+            )}
+          </div>
+        )    
+      }
     </div>
   );
 };
