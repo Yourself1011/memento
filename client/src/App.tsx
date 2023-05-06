@@ -1,5 +1,5 @@
 import './styles.scss'
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/Sidebar/Sidebar.tsx'
 import Home from './pages/Home'
 import Edit from './pages/Edit'
 import { Routes, Route } from 'react-router-dom'
