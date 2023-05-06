@@ -34,7 +34,7 @@ const Flashcards = () => {
         setFlashcardOpen(true)
     }
 
-    const handleResponseClick = (text: string) => {
+    const handleResponseClick = () => {
         setFlashcardOpen(false)
         cardIndex += 1
         if (cardIndex >= cards.length) {
@@ -46,7 +46,7 @@ const Flashcards = () => {
     }
 
     const SpacedRepetitonResponse = ({ text } : { text: string}) => {
-        return <div onClick={() => handleResponseClick(text)}>
+        return <div onClick={() => handleResponseClick()}>
             <span>{text}</span>
         </div>
     }
@@ -56,7 +56,7 @@ const Flashcards = () => {
             { cardsAllCompleted
                 ? <div className="container">
                     <h2>You've completed all of your cards!</h2>
-                    <button onClick={() => navigate('/edit')}></button>
+                    <button onClick={() => navigate('/edit')}>Create more cards</button>
                 </div>
                 : <div className="container">
                     <h2>{currentCard.question}</h2>
