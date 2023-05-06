@@ -10,6 +10,7 @@ export default {
         accent: "#5c6cf4",
         accentlight: "#7884e8",
         accentsuperlight: '#bac1fa',
+        accentbutyoucanbarelyseeit: "#e9ebfd"
       }
     },
   },

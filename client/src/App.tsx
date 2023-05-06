@@ -1,6 +1,6 @@
 import "./styles.scss";
 import Sidebar from "./components/Sidebar/Sidebar.tsx";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home.tsx";
 import Edit from "./pages/Edit/Edit.tsx";
 import { Routes, Route } from "react-router-dom";
 
