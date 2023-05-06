@@ -1,4 +1,3 @@
-import './Home.scss'
 import cohere from '../../assets/cohere.png'
 
 const Home = () => {
@@ -6,7 +5,7 @@ const Home = () => {
     <div className='w-full home'>
       <div className='w-full bg-accentbutyoucanbarelyseeit p-6'>
         <h1>Home</h1>
-        <p className='flex items-center'>Memento: an ai-powered flashcard generator, powered by <img id='cohere' src={cohere} alt='cohere'></img> </p>
+        <p className='flex items-center'>Memento: an ai-powered flashcard generator, powered by <img id='cohere' className='h-8' src={cohere} alt='cohere'></img> </p>
       </div>
       <div className='p-16'>
         <div className='flex gap-10'>
@@ -29,7 +28,7 @@ const Home = () => {
         <div className='container w-full mt-10'>
           <h1>Your Moments</h1>
           <p>Moments that you've created and worked on</p>
-          <div className='pages-container'>
+          <div className='pages-container mt-4'>
             <div>
               <a>Schindler's List Reflection</a>
               <p>01/01/23</p>

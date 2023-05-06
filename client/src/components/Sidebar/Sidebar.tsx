@@ -1,5 +1,6 @@
 import { GrDocument, GrHomeRounded } from "react-icons/gr";
 import { BsCardList } from "react-icons/bs";
+import { AiOutlineUnorderedList } from "react-icons/ai"
 import { NavLink } from "react-router-dom";
 import "./Sidebar.scss";
 
@@ -11,7 +12,11 @@ function Sidebar() {
                 <GrHomeRounded />
                 Home
             </NavLink>
-            <NavLink to="/edit/0">
+            <NavLink to='/pages'>
+            <AiOutlineUnorderedList/>
+            Pages
+          </NavLink>
+          <NavLink to="/edit/0">
                 <GrDocument />
                 Edit
             </NavLink>

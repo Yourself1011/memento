@@ -21,6 +21,24 @@ h1 {
   border-radius: 5px;
 }
 
+.pages-container {
+  div {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #f7fafc;
+    }
+
+    p {
+      color: #999;
+    }
+  }
+}
+
 a {
   color: theme('colors.accent');
   cursor: pointer;
