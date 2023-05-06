@@ -2,10 +2,14 @@ import "./Edit.scss";
 import { useState, useEffect } from "react";
 import { Moment } from "../../types/moment";
 import { useParams } from "react-router-dom";
+import { createMoment } from "../../utils/createMoment";
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
   const { id: rawId } = useParams();
   const id = rawId ? parseInt(rawId) : 0;
+
+  const navigate = useNavigate();
 
   const moments = JSON.parse(localStorage.getItem("moments") as string);
 
@@ -16,7 +20,7 @@ const Edit = () => {
         {
           name: "Untitled Moment",
           text: "",
-          createdDate: Date.now(),
+          createdDate: new Date().toJSON().slice(0,10).replace(/-/g,'/'),
         },
       ] as Moment[])
     );
@@ -45,6 +49,19 @@ const Edit = () => {
         autoFocus
         placeholder="Type something..."
       />
+      {/* <div className='toolbar mb-16 flex-2 mr-20'>
+        <div className='flex gap-2'>
+          <button>AI-Generate Flashcards</button>
+          <button>Create Flashcard</button>
+          <button onClick={() => {
+            const momentId = createMoment();
+            navigate(`/edit/${momentId}`);
+            location.reload();            
+          }}>New Moment</button>
+        </div>
+        <button onClick={() => navigate('/moments')}>Back to Moments</button>
+      </div> */}
+      <button className='mb-16 font-bold text-xl'>⚡ Generate Flashcards</button>
     </div>
   );
 };
