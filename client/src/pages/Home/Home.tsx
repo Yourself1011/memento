@@ -1,6 +1,6 @@
 import cohere from "../../assets/cohere.png";
 
-export const Home = () => {
+const Home = () => {
     return (
         <div className="w-full home">
             <div className="w-full bg-accentbutyoucanbarelyseeit p-6">
@@ -58,3 +58,5 @@ export const Home = () => {
         </div>
     );
 };
+
+export default Home
