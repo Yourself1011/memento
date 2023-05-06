@@ -1,5 +1,5 @@
 import { GrDocument, GrHomeRounded } from "react-icons/gr";
-import { BsCardList } from "react-icons/bs";
+import { BsCardList, BsEyeFill } from "react-icons/bs";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import Create from "../Create/Create";
@@ -27,6 +27,10 @@ function Sidebar() {
                 <NavLink to="/cards">
                     <BsCardList />
                     Flashcards
+                </NavLink>
+                <NavLink to="/ocr">
+                    <BsEyeFill />
+                    OCR
                 </NavLink>
             </div>
             <Create />
