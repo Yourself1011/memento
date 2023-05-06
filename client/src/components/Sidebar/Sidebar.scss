@@ -26,18 +26,3 @@
     }
   }
 }
-.create {
-  margin-top: auto;
-  text-align: center;
-  width: 100%;
-  justify-content: center;
-  cursor: pointer;
-  transition: .3s ease;
-  border-radius: 0px !important;
-  color: white !important;
-  background-color: theme('colors.accent') !important;
-
-  &:hover {
-    background-color: darken(#e8ebfe, 25%) !important;
-  }
-}
