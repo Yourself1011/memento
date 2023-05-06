@@ -1,0 +1,66 @@
+.flashcards {
+  width: 100%;
+  height: 99svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .container {
+    margin-top: 9rem;
+    margin-bottom: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 18rem;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .answer {
+    font-size: 1.5rem;
+  }
+
+  .closed {
+    color: #999;
+  }
+
+  button {
+    font-size: 1.25rem;
+  }
+
+  .srsbox {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+
+    .srsresponse {
+      width: 100%;
+
+      &.Skip {
+        background-color: #eee;
+        border: 1px solid #ddd;
+        &:hover {
+          background-color: darken(#eee, 5%);
+        }
+      }
+      &.Forgot {
+        background-color: rgba(255, 0, 0, 0.2);
+        border: 1px solid rgba(255, 0, 0, 0.2);
+        &:hover {
+          background-color: rgba(255, 0, 0, 0.3);
+        }
+      }
+      &.Recalled {
+        background-color: #dfffef;
+        border: 1px solid darken(#dfffef, 10%);
+        &:hover {
+          background-color: darken(#dfffef, 10%);
+        }
+      }
+    }
+  }
+}

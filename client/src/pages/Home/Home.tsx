@@ -7,7 +7,7 @@ const Home = () => {
       <div className="w-full bg-accentbutyoucanbarelyseeit p-6">
         <h1>Home</h1>
         <p className="flex items-center">
-          Memento: an ai-powered flashcard generator, powered by{" "}
+          Memento: an ai-powered flashcard generator, featuring{" "}
           <img
             id="cohere"
             className="h-8"
