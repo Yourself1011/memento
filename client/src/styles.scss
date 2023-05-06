@@ -9,3 +9,27 @@ body {
   font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.container {
+  border: 1px solid theme('colors.accentsuperlight');
+  padding: 1.5rem;
+  border-radius: 5px;
+}
+
+a {
+  color: theme('colors.accent');
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+li {
+  display: list-item;
+}
