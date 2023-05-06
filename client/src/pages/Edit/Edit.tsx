@@ -21,6 +21,7 @@ const Edit = () => {
             ] as Moment[])
         );
     }
+    localStorage.setItem("lastedited", id.toString());
 
     const [text, setText] = useState<string>(moments[id].text);
     const [name, setName] = useState<string>(moments[id].name);

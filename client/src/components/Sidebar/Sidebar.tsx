@@ -5,6 +5,9 @@ import { NavLink } from "react-router-dom";
 import "./Sidebar.scss";
 
 function Sidebar() {
+
+  let lastedited = JSON.parse(localStorage.getItem("lastedited") as string);
+
   return (
     <div className="border-r-[#e7e7ef] border-r-2 flex flex-col justify-between shrink-0 sidebar">
       <div className='px-6'>
@@ -17,7 +20,7 @@ function Sidebar() {
           <AiOutlineUnorderedList/>
           Moments
         </NavLink>
-        <NavLink to="/edit/0">
+        <NavLink to={`/edit/${lastedited}`}>
           <GrDocument />
           Edit
         </NavLink>
