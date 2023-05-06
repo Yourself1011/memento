@@ -6,18 +6,20 @@ const MomentList = ({ className = "" }) => {
 
   return (
     <div className={`pages-container ${className}`}>
-      <div>
+      <div style={{display: moments ? "flex" : "none"}}>
         <p>Name</p>
         <p>Date Created</p>
       </div>
-      {moments.map((value: Moment, index: number) => {
-        return (
-          <div>
-            <Link to={`/edit/${index}`}>{value.name}</Link>
-            <p>{new Date(value.createdDate).toLocaleString("en-CA")}</p>
-          </div>
-        );
-      })}
+      {
+        moments ? moments.map((value:Moment, index:number) => {
+          return (
+            <div>
+              <Link to={`/edit/${index}`}>{value.name}</Link>
+              <p>{value.createdDate}</p>
+            </div>
+          )
+        }) : <p>No moments found</p>
+      }
     </div>
   );
 };
