@@ -23,6 +23,6 @@ export const summarize = async (params: summarizeParams) => {
     }
     catch (error) {
         console.error(error)
-        return error
+        return "UR A BOZO"
     }
 }
