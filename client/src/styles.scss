@@ -21,29 +21,22 @@ h1 {
 }
 
 .pages-container {
-  div:not(:first-child) {
-    border-bottom: 1px solid #e2e8f0;
-    padding: 0.25rem;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    
-    &:hover {
-      background-color: #f7fafc;
-    }
-
-    p {
-      color: #999;
-    }
-  }
-  div:first-child {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #999;
+  width: 95%;
+  th {
+    text-align: left;
     text-transform: uppercase;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
+  }
+  tr {
+    border-bottom: 1px solid #ddd;
+  }
+  td {
+    padding: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:first-child {
+      padding-left: 0.5rem;
+    }
   }
 }
 
