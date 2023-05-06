@@ -1,7 +1,7 @@
 import { Moment } from "../types/moment";
 
 export function createMoment() {
-    const moments = localStorage.getItem("moments");
+    const moments = JSON.parse(localStorage.getItem("moments") as string);
 
     if (!moments) {
         localStorage.setItem(
@@ -14,5 +14,12 @@ export function createMoment() {
                 },
             ] as Moment[])
         );
+    } else {
+        moments.append({
+            name: "Untitled Moment",
+            text: "",
+            createdDate: Date.now(),
+        });
+        localStorage.setItem("moments", JSON.stringify(moments));
     }
 }

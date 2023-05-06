@@ -29,9 +29,7 @@ function Sidebar() {
                     Flashcards
                 </NavLink>
             </div>
-            <div>
-                <a className="create">+ Create</a>
-            </div>
+            <Create />
         </div>
     );
 }
