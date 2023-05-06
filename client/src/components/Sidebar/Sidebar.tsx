@@ -11,7 +11,7 @@ function Sidebar() {
                 <GrHomeRounded />
                 Home
             </NavLink>
-            <NavLink to="/edit">
+            <NavLink to="/edit/0">
                 <GrDocument />
                 Edit
             </NavLink>
