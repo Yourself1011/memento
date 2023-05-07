@@ -78,17 +78,17 @@ const Edit = () => {
         onClick={async () => {
           if (!loading) {
             setLoading(true);
-            const output = await generate(text);
+            const output =
+              "[" +
+              (await generate(text)).generations[0].text.split("[").at(-1);
             try {
               localStorage.setItem(
                 "cards",
                 JSON.stringify(
                   cards.concat(
-                    (JSON.parse(output.generations[0].text) as Card[]).map(
-                      (x) => {
-                        return { ...x, file: name };
-                      }
-                    )
+                    (JSON.parse(output) as Card[]).map((x) => {
+                      return { ...x, file: name };
+                    })
                   )
                 )
               );
