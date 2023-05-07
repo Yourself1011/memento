@@ -9,21 +9,30 @@ export const authenticate = async ({
   email: string;
   password: string;
 }) => {
-    if ((await User.findOne({ username })).username) {
-        console.log("Already exists")
-        throw new TypeError("Username already exists.")
+    const foundUser = await User.findOne({ username })
+    if (foundUser) {
+        if (foundUser.email !== email) {
+            throw new TypeError("Username already exists.")
+        }
+        if (foundUser.password !== password) {
+            throw new TypeError("Incorrect password.")
+        }
+        else return {
+            message: "Success! You have been authenticated."
+        }
     }
-    else if ((await User.findOne({ email })).email) {
-        throw new TypeError("Email already exists.")
-    }
-    
-    await User.findOneAndUpdate(
-        { username, email, password },
-        { username, email, password },
-        { upsert: true }
-    )
+    else {
+        if (await User.findOne({ email })) {
+            throw new TypeError("An account with that email already exists")
+        }
+        else {
+            await User.create({ username, email, password })
 
-    return {
-        message: "Success! You have been authenticated."
+            return {
+                message: "Success! Your account has been created."
+            }
+        }
     }
+
+    
 }
