@@ -1,13 +1,14 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+import express, { Express, Request, Response } from 'express'
+import cors from 'cors'
 
-const express = require('express')
-const app = express()
-const cors = require('cors')
+const app: Express = express()
+dotenv.config()
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.json({ 'message': 'Hello World and welcome to the API for Memento!'})
 })
 
