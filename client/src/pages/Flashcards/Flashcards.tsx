@@ -25,6 +25,9 @@ const Flashcards = () => {
 
   const rawCards: string = localStorage.getItem("cards") ?? "[]";
 
+  const [cardsDone, setCardsDone] = useState<number>(0);
+  const [cardsRight, setCardsRight] = useState<number>(0);
+
   if (!rawCards) {
     localStorage.setItem("cards", "[]");
   }
@@ -43,6 +46,7 @@ const Flashcards = () => {
 
   const handleShowButtonClick = () => {
     setFlashcardOpen(true);
+    setCardsDone(cardsDone + 1);
   };
 
   const handleResponseClick = () => {
@@ -75,6 +79,7 @@ const Flashcards = () => {
             console.log('reward')
             reward();
           }
+          setCardsRight(cardsRight + 1);
         }}
       >
         {text}
@@ -98,6 +103,10 @@ const Flashcards = () => {
           </div>
         ) : (
           <div className="container">
+            <div className='mb-4 text-xl flex justify-between'>
+              <p>Cards: {cardsRight}/{cardsDone}</p>
+              <p>{currentCard.file}</p>
+            </div>
             <div>
               {currentCard?.file && <p>{currentCard.file}</p>}
               <h2>{currentCard.question}</h2>
