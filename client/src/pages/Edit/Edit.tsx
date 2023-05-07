@@ -97,8 +97,9 @@ const Edit = () => {
               setSuccess(false);
               console.log(output);
               console.error(err);
+            } finally {
+              setLoading(false);
             }
-            setLoading(false);
           }
         }}
         disabled={loading}

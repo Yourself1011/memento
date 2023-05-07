@@ -38,9 +38,9 @@ export const generate = async (text: string) => {
     },
     body: JSON.stringify({
       model: "command",
-      prompt: `Generate 5 concise questions and answers in an array of JSON objects from the following text:\n${text}`,
+      prompt: `Generate a number of concise questions and answers in an array of JSON objects from the following text:\n${text}\nFor example, format the output like this:\n[\n{\n"question": "question goes here",\n"answer": "answer goes here"\n}\n]\n\nOnce again, keep it at 5 question and answer pairs`,
       temperature: 0,
-      max_tokens: 625,
+      max_tokens: 3000,
     }),
   };
 
