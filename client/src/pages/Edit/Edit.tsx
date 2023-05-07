@@ -89,7 +89,7 @@ const Edit = () => {
                 JSON.stringify(
                   cards.concat(
                     (JSON.parse(output) as Card[]).map((x) => {
-                      return { ...x, file: name };
+                      return { ...x, file: name, stage: 3 };
                     })
                   )
                 )

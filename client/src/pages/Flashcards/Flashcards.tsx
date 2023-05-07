@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Flashcards.scss";
 import { Card } from "../../types/card";
-import { useReward } from 'react-rewards';
+import { useReward } from "react-rewards";
 
 // const cards: Card[] = [
 //     {
@@ -34,11 +34,11 @@ const Flashcards = () => {
 
   const cards: Card[] = JSON.parse(rawCards);
 
-  const { reward, isAnimating } = useReward('rewardId', 'confetti', {
+  const { reward, isAnimating } = useReward("rewardId", "confetti", {
     lifetime: 350,
     elementCount: 40,
     spread: 60,
-    startVelocity: 20
+    startVelocity: 20,
   });
 
   const [currentCard, setCurrentCard] = useState<Card>(cards[0]);
@@ -52,15 +52,15 @@ const Flashcards = () => {
   const handleResponseClick = () => {
     const index = cards.findIndex((c) => c.question === currentCard.question)!;
     const difference = cards[index].stage - 1;
-    if (difference <= 0) {
-      cards.splice(index, 1);
-    } else {
-      cards[index].stage = difference;
-    }
+    cards[index].stage = difference;
+    cards.push(cards[index]);
+    cards.splice(index, 1);
 
     setFlashcardOpen(false);
 
-    const newCard = cards?.[Math.floor(Math.random() * cards.length)];
+    const liveCards = cards?.filter((x) => x.stage >= 0);
+    const newCard =
+      liveCards?.[Math.floor(Math.random() * liveCards.length * 0.75)];
 
     if (!newCard) {
       setCardsAllCompleted(true);
@@ -69,14 +69,14 @@ const Flashcards = () => {
     }
   };
 
-  const SpacedRepetitonResponse = ({ text }: { text: string }) => {
+  const SpacedRepetitionResponse = ({ text }: { text: string }) => {
     return (
       <button
         className={`srsresponse ${text}`}
         onClick={() => {
-          handleResponseClick()
-          if (text === 'Recalled') {
-            console.log('reward')
+          handleResponseClick();
+          if (text === "Recalled") {
+            console.log("reward");
             reward();
           }
           setCardsRight(cardsRight + 1);
@@ -95,42 +95,44 @@ const Flashcards = () => {
           Review and remember by studying flashcards
         </p>
       </div>
-      {(cards === undefined || cards.length === 0) ? <p className='text-left'>No cards found</p> : 
-        cardsAllCompleted ? (
-          <div className="container">
-            <h2>You've completed all of your cards!</h2>
-            <button onClick={() => navigate("/edit")}>Create more cards</button>
-          </div>
-        ) : (
-          <div className="container">
-            <div className='mb-4 text-xl flex justify-between'>
-              <p>Cards: {cardsRight}/{cardsDone}</p>
-              <p>{currentCard.file}</p>
-            </div>
-            <div>
-              <h2>{currentCard.question}</h2>
-            </div>
-            <div id="rewardId" className='w-4 ml-auto mr-auto'></div>
-            <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
-              {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
+      {cards === undefined || cards.length === 0 ? (
+        <p className="text-left">No cards found</p>
+      ) : cardsAllCompleted ? (
+        <div className="container">
+          <h2>You've completed all of your cards!</h2>
+          <button onClick={() => navigate("/edit")}>Create more cards</button>
+        </div>
+      ) : (
+        <div className="container">
+          <div className="mb-4 text-xl flex justify-between">
+            <p>
+              Cards: {cardsRight}/{cardsDone}
             </p>
-  
-            {!flashcardOpen ? (
-              <div>
-                <button className="w-full mt-4" onClick={handleShowButtonClick}>
-                  Show answer
-                </button>
-              </div>
-            ) : (
-              <div className="w-full flex srsbox">
-                <SpacedRepetitonResponse text="Skip" />
-                <SpacedRepetitonResponse text="Forgot" />
-                <SpacedRepetitonResponse text="Recalled" />
-              </div>
-            )}
+            <p>{currentCard.file}</p>
           </div>
-        )    
-      }
+          <div>
+            <h2>{currentCard.question}</h2>
+          </div>
+          <div id="rewardId" className="w-4 ml-auto mr-auto"></div>
+          <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
+            {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
+          </p>
+
+          {!flashcardOpen ? (
+            <div>
+              <button className="w-full mt-4" onClick={handleShowButtonClick}>
+                Show answer
+              </button>
+            </div>
+          ) : (
+            <div className="w-full flex srsbox">
+              <SpacedRepetitionResponse text="Skip" />
+              <SpacedRepetitionResponse text="Forgot" />
+              <SpacedRepetitionResponse text="Recalled" />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
