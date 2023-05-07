@@ -60,58 +60,48 @@ const Edit = () => {
         autoFocus
         placeholder="Type something..."
       />
-      {/* <div className='toolbar mb-16 flex-2 mr-20'>
-        <div className='flex gap-2'>
-          <button>AI-Generate Flashcards</button>
-          <button>Create Flashcard</button>
-          <button onClick={() => {
-            const momentId = createMoment();
-            navigate(`/edit/${momentId}`);
-            location.reload();            
-          }}>New Moment</button>
-        </div>
-        <button onClick={() => navigate('/moments')}>Back to Moments</button>
-      </div> */}
-      <button
-        className={`mb-8 font-bold text-2xl ${loading ? "show no" : "hide"} ${
-          success ? "success" : success == false ? "failure" : ""
-        }`}
-        onClick={async () => {
-          if (!loading) {
-            setLoading(true);
-            setLoadingMsg('Generating...')
-            const output =
-              "[" +
-              (await generate(text)).generations[0].text.split("[").at(-1);
-            try {
-              localStorage.setItem(
-                "cards",
-                JSON.stringify(
-                  cards.concat(
-                    (JSON.parse(output) as Card[]).map((x) => {
-                      return { ...x, file: name, stage: 3 };
-                    })
+      <div className='flex gap-4 mb-8'>
+        <button
+          className={`font-bold text-2xl ${loading ? "show no" : "hide"} ${
+            success ? "success" : success == false ? "failure" : ""
+          }`}
+          onClick={async () => {
+            if (!loading) {
+              setLoading(true);
+              setLoadingMsg('Generating...')
+              const output =
+                "[" +
+                (await generate(text)).generations[0].text.split("[").at(-1);
+              try {
+                localStorage.setItem(
+                  "cards",
+                  JSON.stringify(
+                    cards.concat(
+                      (JSON.parse(output) as Card[]).map((x) => {
+                        return { ...x, file: name };
+                      })
+                    )
                   )
-                )
-              );
-              setSuccess(true);
-              setLoadingMsg('Flashcards Generated!')
-            } catch (err) {
-              setSuccess(false);
-              setLoadingMsg('Error!')
-              console.log(output);
-              console.error(err);
-            } finally {
-              setLoading(false);
+                );
+                setSuccess(true);
+                setLoadingMsg('Flashcards Generated!')
+              } catch (err) {
+                setSuccess(false);
+                setLoadingMsg('Error!')
+                console.log(output);
+                console.error(err);
+              } finally {
+                setLoading(false);
+              }
             }
-          }
-        }}
-        disabled={loading}
-      >
-        ⚡ {loadingMsg} <AiOutlineLoading className="loading" />
-        {!loading && success && <BsCheck className={`resultIndicator`} />}
-        {!loading && success == false && <BsX className={`resultIndicator`} />}
-      </button>
+          }}
+          disabled={loading}
+        >
+          ⚡ {loadingMsg} <AiOutlineLoading className="loading" />
+          {!loading && success && <BsCheck className={`resultIndicator`} />}
+          {!loading && success == false && <BsX className={`resultIndicator`} />}
+        </button>
+      </div>
     </div>
   );
 };

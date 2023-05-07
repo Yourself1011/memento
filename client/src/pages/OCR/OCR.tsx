@@ -6,6 +6,7 @@ import Tesseract from "tesseract.js";
 const OCR = () => {
   const [imagePath, setImagePath] = useState<string>("");
   const [text, setText] = useState<string | undefined>("");
+  const [loading, setLoading] = useState<string>('Extract Text');
   const [confidence, setConfidence] = useState<number | undefined>();
   const navigate = useNavigate();
 
@@ -14,13 +15,16 @@ const OCR = () => {
   };
 
   const handleClick = () => {
+    setLoading('Extracting...');
     Tesseract.recognize(imagePath, "eng", {})
       .catch((err) => {
         console.error(err);
+        setLoading('An error occurred')
       })
       .then((result) => {
         setConfidence(result?.data.confidence);
         setText(result?.data.text);
+        setLoading('Extraction complete');
       });
   };
 
@@ -61,7 +65,7 @@ const OCR = () => {
               }
             >
               {" "}
-              Extract text
+              {loading}
             </button>
             <button
               className={imagePath ? "" : "no"}
