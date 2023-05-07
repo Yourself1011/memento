@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 import notFound from '../middlewares/notfound.ts'
+import authRouter from './routes/users.ts'
 
 const app: Express = express()
 dotenv.config()
@@ -14,6 +15,8 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response) => {
     res.json({ 'message': 'Hello World and welcome to the API for Memento!'})
 })
+
+app.use(authRouter)
 
 app.get('*', notFound)
 

@@ -1,9 +1,9 @@
 import express, { Router, Request, Response, NextFunction } from 'express'
 import { authenticate } from '../services/auth.ts'
 
-const router: Router = express.Router()
+const authRouter: Router = express.Router()
 
-router.post('/login', (req: Request, res: Response, next: NextFunction) => {
+authRouter.post('/auth', (req: Request, res: Response, next: NextFunction) => {
     const { username, email, password } = req.body;
 
     authenticate({ username, email, password })
@@ -18,4 +18,4 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
         })
 })
 
-export default router
+export default authRouter
