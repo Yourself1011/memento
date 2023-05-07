@@ -12,6 +12,10 @@ function SignIn() {
         <input
           type="email"
           className="block border-[#ddd] border rounded-[5px] p-4 w-full"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
       </label>
       <label className="block mt-8">
@@ -19,6 +23,10 @@ function SignIn() {
         <input
           type="password"
           className="block border-[#ddd] border rounded-[5px] p-4 w-full"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
         />
       </label>
       <button className="mt-8 bg-accent text-white">Submit</button>
