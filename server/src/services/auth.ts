@@ -1,4 +1,4 @@
-import User from "../models/Users";
+import User from "../models/Users.ts";
 
 export const signUp = async ({ username, email, password }: {
     username: string,
@@ -11,7 +11,14 @@ export const signUp = async ({ username, email, password }: {
     else if (await User.findOne({ email })) {
         throw new TypeError("Password already exists.")
     }
-    else return {
+    
+    const newUser = new User({
+        username, email, password
+    })
+
+    newUser.save()
+
+    return {
         message: "Success! User has been created.",
         user: {
             username,
