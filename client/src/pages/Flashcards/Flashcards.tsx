@@ -50,6 +50,8 @@ const Flashcards = () => {
     cards === undefined || cards.length === 0
   );
 
+  const [streak, setStreak] = useState(0)
+
   const handleShowButtonClick = () => {
     setFlashcardOpen(true);
     setCardsDone(cardsDone + 1);
@@ -62,6 +64,9 @@ const Flashcards = () => {
     if (cards[index].stage > 3) cards[index].stage = 3;
     cards.push(cards[index]);
     cards.splice(index, 1);
+
+    if (text === "Recalled") setStreak(s => s + 1)
+    else if (text === "Forgot") setStreak(0)
 
     setFlashcardOpen(false);
 
