@@ -25,6 +25,7 @@
         }
     }
     button {
+        padding: 1.5rem;
         .loading {
             display: inline;
             margin-left: 1rem;
@@ -35,8 +36,15 @@
         }
 
         .resultIndicator {
-            animation: die 5s linear forwards;
-            display: none;
+            display: inline;
+        }
+        &.success {
+            background-color: rgba(0, 255, 0, 0.3) !important;
+            border-color: rgba(0, 255, 0, 0.3) !important;
+        }
+        &.failure {
+            background-color: rgba(255, 0, 0, 0.3) !important;
+            border-color: rgba(255, 0, 0, 0.3) !important;
         }
     }
 
@@ -49,18 +57,5 @@
     }
     to {
         transform: rotate(315deg)
-    }
-}
-
-@keyframes die {
-    0% {
-        opacity: 100%;
-        display: inline;
-    }
-    75% {
-        opacity: 100%;
-    }
-    100% {
-        opacity: 0%;
     }
 }

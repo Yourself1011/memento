@@ -10,6 +10,7 @@ import { generate } from "../../utils/cohere";
 const Edit = () => {
   const [success, setSuccess] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState("Generate Flashcards");
   const { id: rawId } = useParams();
   const id = rawId ? parseInt(rawId) : 0;
 
@@ -72,12 +73,13 @@ const Edit = () => {
         <button onClick={() => navigate('/moments')}>Back to Moments</button>
       </div> */}
       <button
-        className={`mb-8 font-bold text-xl ${loading ? "show no" : "hide"} ${
+        className={`mb-8 font-bold text-2xl ${loading ? "show no" : "hide"} ${
           success ? "success" : success == false ? "failure" : ""
         }`}
         onClick={async () => {
           if (!loading) {
             setLoading(true);
+            setLoadingMsg('Generating...')
             const output =
               "[" +
               (await generate(text)).generations[0].text.split("[").at(-1);
@@ -93,8 +95,10 @@ const Edit = () => {
                 )
               );
               setSuccess(true);
+              setLoadingMsg('Flashcards Generated!')
             } catch (err) {
               setSuccess(false);
+              setLoadingMsg('Error!')
               console.log(output);
               console.error(err);
             } finally {
@@ -104,7 +108,7 @@ const Edit = () => {
         }}
         disabled={loading}
       >
-        ⚡ Generate Flashcards <AiOutlineLoading className="loading" />
+        ⚡ {loadingMsg} <AiOutlineLoading className="loading" />
         {!loading && success && <BsCheck className={`resultIndicator`} />}
         {!loading && success == false && <BsX className={`resultIndicator`} />}
       </button>
