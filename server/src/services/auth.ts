@@ -1,6 +1,6 @@
 import User from "../models/Users.ts";
 
-export const signUp = async ({ username, email, password }: {
+export const authenticate = async ({ username, email, password }: {
     username: string,
     email: string,
     password: string
@@ -12,11 +12,16 @@ export const signUp = async ({ username, email, password }: {
         throw new TypeError("Password already exists.")
     }
     
-    const newUser = new User({
-        username, email, password
-    })
+    const { errors } = await User.findOneAndUpdate(
+        { username, email, password },
+        { username, email, password },
+        { upsert: true }
+    )
 
-    newUser.save()
+    if (errors) {
+        throw errors
+    }
+
 
     return {
         message: "Success! User has been created.",
