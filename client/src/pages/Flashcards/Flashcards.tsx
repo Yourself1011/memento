@@ -42,7 +42,9 @@ const Flashcards = () => {
   });
 
   const [currentCard, setCurrentCard] = useState<Card>(cards[0]);
-  const [cardsAllCompleted, setCardsAllCompleted] = useState(false);
+  const [cardsAllCompleted, setCardsAllCompleted] = useState(
+    cards === undefined || cards.length === 0
+  );
 
   const handleShowButtonClick = () => {
     setFlashcardOpen(true);
@@ -95,12 +97,10 @@ const Flashcards = () => {
           Review and remember by studying flashcards
         </p>
       </div>
-      {cards === undefined || cards.length === 0 ? (
-        <p className="text-left">No cards found</p>
-      ) : cardsAllCompleted ? (
+      {cardsAllCompleted ? (
         <div className="container">
           <h2>You've completed all of your cards!</h2>
-          <button onClick={() => navigate("/edit")}>Create more cards</button>
+          <button onClick={() => navigate("/")}>Go home</button>
         </div>
       ) : (
         <div className="container">
