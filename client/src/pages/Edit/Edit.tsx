@@ -60,7 +60,7 @@ const Edit = () => {
         autoFocus
         placeholder="Type something..."
       />
-      <div className='flex gap-4 mb-8'>
+      <div className="flex gap-4 mb-8">
         <button
           className={`font-bold text-2xl ${loading ? "show no" : "hide"} ${
             success ? "success" : success == false ? "failure" : ""
@@ -68,7 +68,7 @@ const Edit = () => {
           onClick={async () => {
             if (!loading) {
               setLoading(true);
-              setLoadingMsg('Generating...')
+              setLoadingMsg("Generating...");
               const output =
                 "[" +
                 (await generate(text)).generations[0].text.split("[").at(-1);
@@ -78,16 +78,16 @@ const Edit = () => {
                   JSON.stringify(
                     cards.concat(
                       (JSON.parse(output) as Card[]).map((x) => {
-                        return { ...x, file: name };
+                        return { ...x, file: name, stage: 3 };
                       })
                     )
                   )
                 );
                 setSuccess(true);
-                setLoadingMsg('Flashcards Generated!')
+                setLoadingMsg("Flashcards Generated!");
               } catch (err) {
                 setSuccess(false);
-                setLoadingMsg('Error!')
+                setLoadingMsg("Error!");
                 console.log(output);
                 console.error(err);
               } finally {
@@ -99,7 +99,9 @@ const Edit = () => {
         >
           ⚡ {loadingMsg} <AiOutlineLoading className="loading" />
           {!loading && success && <BsCheck className={`resultIndicator`} />}
-          {!loading && success == false && <BsX className={`resultIndicator`} />}
+          {!loading && success == false && (
+            <BsX className={`resultIndicator`} />
+          )}
         </button>
       </div>
     </div>
