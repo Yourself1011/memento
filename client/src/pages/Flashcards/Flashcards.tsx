@@ -25,14 +25,17 @@ const Flashcards = () => {
   const navigate = useNavigate();
   const [flashcardOpen, setFlashcardOpen] = useState(false);
 
-  const rawCards: string = localStorage.getItem("cards") ?? "[]";
+  let rawCards: string | null = localStorage.getItem("cards");
 
   const [cardsDone, setCardsDone] = useState<number>(0);
   const [cardsRight, setCardsRight] = useState<number>(0);
 
-  if (!rawCards) {
+  if (rawCards === null) {
     localStorage.setItem("cards", "[]");
+    rawCards = "[]"
   }
+
+   
 
   const cards: Card[] = JSON.parse(rawCards);
 
@@ -47,10 +50,8 @@ const Flashcards = () => {
     cards.filter((x) => x.stage >= 0)[0]
   );
   const [cardsAllCompleted, setCardsAllCompleted] = useState(
-    cards === undefined || cards.length === 0
+    cards === undefined || cards.filter((x) => x.stage >= 0).length === 0
   );
-
-  const [streak, setStreak] = useState(0)
 
   const handleShowButtonClick = () => {
     setFlashcardOpen(true);
@@ -64,9 +65,6 @@ const Flashcards = () => {
     if (cards[index].stage > 3) cards[index].stage = 3;
     cards.push(cards[index]);
     cards.splice(index, 1);
-
-    if (text === "Recalled") setStreak(s => s + 1)
-    else if (text === "Forgot") setStreak(0)
 
     setFlashcardOpen(false);
 
