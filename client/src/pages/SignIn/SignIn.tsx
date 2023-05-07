@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [fetchedResult, setFetchedResult] = useState<any>(null);
+
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ function SignIn() {
 
       const result = await response.json();
       setFetchedResult(result.message);
-      navigate("/");
+      setSuccess(true);
     } catch (e: any) {
       console.log(e);
       setFetchedResult(e.message);
@@ -66,7 +66,14 @@ function SignIn() {
             required
           />
         </label>
-        <button type="submit" className="mt-8 bg-accent text-white">
+        <button
+          type="submit"
+          className={`mt-8 ${
+            success
+              ? "bg-[rgba(0,255,0,0.3)] text-black"
+              : "bg-accent text-white"
+          }`}
+        >
           Submit
         </button>
         {fetchedResult && <p>{fetchedResult?.message}</p>}
