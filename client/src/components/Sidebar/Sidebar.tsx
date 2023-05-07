@@ -26,8 +26,8 @@ function Sidebar() {
   return (
     <div className="border-r-[#e7e7ef] border-r-2 flex flex-col justify-between shrink-0 sidebar">
       <div className="px-6">
-        <p className="font-bold text-[32px] py-6 flex items-center justify-between">
-          Memento <img src={logo} alt="logo" className="h-10" />
+        <p onClick={() => navigate('/')} className="cursor-pointer font-bold text-[32px] py-6 flex items-center justify-between">
+          Memento <img src={logo} alt='logo' className="h-10"/>
         </p>
         <NavLink to="/">
           <GrHomeRounded />

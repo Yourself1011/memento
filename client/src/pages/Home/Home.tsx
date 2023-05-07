@@ -36,7 +36,7 @@ const Home = () => {
                     ></img>{" "}
                 </p>
             </div>
-            <div className="p-16">
+            <div className="p-12">
                 <div className="flex gap-10">
                     <div className="container">
                         <h1>New Moment</h1>
