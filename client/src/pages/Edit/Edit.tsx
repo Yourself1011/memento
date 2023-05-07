@@ -78,24 +78,25 @@ const Edit = () => {
         onClick={async () => {
           if (!loading) {
             setLoading(true);
+            const output = await generate(text);
             try {
               localStorage.setItem(
                 "cards",
                 JSON.stringify(
                   cards.concat(
-                    (
-                      JSON.parse(
-                        (await generate(text)).generations[0].text
-                      ) as Card[]
-                    ).map((x) => {
-                      return { ...x, file: name };
-                    })
+                    (JSON.parse(output.generations[0].text) as Card[]).map(
+                      (x) => {
+                        return { ...x, file: name };
+                      }
+                    )
                   )
                 )
               );
               setSuccess(true);
-            } catch {
+            } catch (err) {
               setSuccess(false);
+              console.log(output);
+              console.error(err);
             }
             setLoading(false);
           }
