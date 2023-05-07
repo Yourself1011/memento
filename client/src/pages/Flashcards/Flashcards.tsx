@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Flashcards.scss";
 import { Card } from "../../types/card";
+import { useReward } from 'react-rewards';
 
 // const cards: Card[] = [
 //     {
@@ -30,7 +31,12 @@ const Flashcards = () => {
 
   const cards: Card[] = JSON.parse(rawCards);
 
-  console.log(cards)
+  const { reward, isAnimating } = useReward('rewardId', 'confetti', {
+    lifetime: 350,
+    elementCount: 40,
+    spread: 60,
+    startVelocity: 20
+  });
 
   const [currentCard, setCurrentCard] = useState<Card>(cards[0]);
   const [cardsAllCompleted, setCardsAllCompleted] = useState(false);
@@ -63,7 +69,13 @@ const Flashcards = () => {
     return (
       <button
         className={`srsresponse ${text}`}
-        onClick={() => handleResponseClick()}
+        onClick={() => {
+          handleResponseClick()
+          if (text === 'Recalled') {
+            console.log('reward')
+            reward();
+          }
+        }}
       >
         {text}
       </button>
@@ -90,23 +102,22 @@ const Flashcards = () => {
               {currentCard?.file && <p>{currentCard.file}</p>}
               <h2>{currentCard.question}</h2>
             </div>
+            <div id="rewardId" className='w-4 ml-auto mr-auto'></div>
             <p className={`answer ${flashcardOpen ? "" : "closed"}`}>
               {flashcardOpen ? currentCard.answer : "(Answer will appear here)"}
             </p>
   
             {!flashcardOpen ? (
               <div>
-                <button className="w-full" onClick={handleShowButtonClick}>
+                <button className="w-full mt-4" onClick={handleShowButtonClick}>
                   Show answer
                 </button>
               </div>
             ) : (
-              <div className="w-full flex flex-col">
-                <div className="srsbox">
-                  <SpacedRepetitonResponse text="Skip" />
-                  <SpacedRepetitonResponse text="Forgot" />
-                  <SpacedRepetitonResponse text="Recalled" />
-                </div>
+              <div className="w-full flex srsbox">
+                <SpacedRepetitonResponse text="Skip" />
+                <SpacedRepetitonResponse text="Forgot" />
+                <SpacedRepetitonResponse text="Recalled" />
               </div>
             )}
           </div>

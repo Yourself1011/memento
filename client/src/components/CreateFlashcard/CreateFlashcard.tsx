@@ -44,7 +44,7 @@ function CreateFlashcard({ open, setOpen }: CreateFlashcardProps) {
             <div className="flex justify-end gap-2 mt-4">
               <button onClick={() => setOpen(false)}>Cancel</button>
               <button
-                className="bg-accent text-white"
+                className="bg-accent hover:bg-accentlight text-white"
                 onClick={() => {
                   cards.push({
                     question: front,

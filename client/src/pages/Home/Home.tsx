@@ -4,8 +4,16 @@ import { createMoment } from "../../utils/createMoment";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { useReward } from 'react-rewards';
+
 const Home = () => {
     const navigate = useNavigate();
+    const {reward, isAnimating} = useReward("rewardd", "confetti", {
+        lifetime: 175,
+        elementCount: 20,
+        spread: 60,
+    });
+
     const [lastEdited, setLastEdited] = useState(
         localStorage.getItem("lastEdited") ?? "0"
       );
@@ -22,6 +30,9 @@ const Home = () => {
     
     return (
         <div className="w-full home">
+            <button onClick={() => {reward()}}>
+                <span id='rewardd'>among</span>
+            </button>
             <div className="w-full bg-accentbutyoucanbarelyseeit p-6">
                 <h1>Home</h1>
                 <p>⚡ Smarter flashcards, Smarter learning.</p>
