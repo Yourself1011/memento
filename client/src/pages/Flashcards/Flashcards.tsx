@@ -108,7 +108,6 @@ const Flashcards = () => {
               <p>{currentCard.file}</p>
             </div>
             <div>
-              {currentCard?.file && <p>{currentCard.file}</p>}
               <h2>{currentCard.question}</h2>
             </div>
             <div id="rewardId" className='w-4 ml-auto mr-auto'></div>

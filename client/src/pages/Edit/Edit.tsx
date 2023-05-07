@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Card } from "../../types/card";
 import { AiOutlineLoading } from "react-icons/ai";
 import { BsCheck, BsX } from "react-icons/bs";
-import { generate } from "../../cohere";
+import { generate } from "../../utils/cohere";
 
 const Edit = () => {
   const [success, setSuccess] = useState<boolean | null>(null);
