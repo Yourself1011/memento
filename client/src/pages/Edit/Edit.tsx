@@ -4,9 +4,11 @@ import { Moment } from "../../types/moment";
 import { useParams } from "react-router-dom";
 import { Card } from "../../types/card";
 import { AiOutlineLoading } from "react-icons/ai";
+import { BsCheck, BsX } from "react-icons/bs";
 import { generate } from "../../cohere";
 
 const Edit = () => {
+  const [success, setSuccess] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const { id: rawId } = useParams();
   const id = rawId ? parseInt(rawId) : 0;
@@ -70,30 +72,39 @@ const Edit = () => {
         <button onClick={() => navigate('/moments')}>Back to Moments</button>
       </div> */}
       <button
-        className={`mb-8 font-bold text-xl ${loading ? "show no" : "hide"}`}
+        className={`mb-8 font-bold text-xl ${loading ? "show no" : "hide"} ${
+          success ? "success" : success == false ? "failure" : ""
+        }`}
         onClick={async () => {
           if (!loading) {
             setLoading(true);
-            localStorage.setItem(
-              "cards",
-              JSON.stringify(
-                cards.concat(
-                  (
-                    JSON.parse(
-                      (await generate(text)).generations[0].text
-                    ) as Card[]
-                  ).map((x) => {
-                    return { ...x, file: name };
-                  })
+            try {
+              localStorage.setItem(
+                "cards",
+                JSON.stringify(
+                  cards.concat(
+                    (
+                      JSON.parse(
+                        (await generate(text)).generations[0].text
+                      ) as Card[]
+                    ).map((x) => {
+                      return { ...x, file: name };
+                    })
+                  )
                 )
-              )
-            );
+              );
+              setSuccess(true);
+            } catch {
+              setSuccess(false);
+            }
             setLoading(false);
           }
         }}
         disabled={loading}
       >
-        ⚡ Generate Flashcards <AiOutlineLoading />
+        ⚡ Generate Flashcards <AiOutlineLoading className="loading" />
+        {!loading && success && <BsCheck className={`resultIndicator`} />}
+        {!loading && success == false && <BsX className={`resultIndicator`} />}
       </button>
     </div>
   );

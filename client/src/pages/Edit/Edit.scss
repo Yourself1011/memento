@@ -24,14 +24,23 @@
             outline: none;
         }
     }
-    button svg {
-        display: inline;
-        margin-left: 1rem;
-        animation: spin 2s ease-in-out infinite;
+    button {
+        .loading {
+            display: inline;
+            margin-left: 1rem;
+            animation: spin 2s ease-in-out infinite;
+        }
+        &.hide .loading {
+            display: none;
+        }
+
+        .resultIndicator {
+            animation: die 5s linear forwards;
+            display: none;
+        }
     }
-    button.hide svg {
-        display: none;
-    }
+
+
 }
 
 @keyframes spin {
@@ -40,5 +49,18 @@
     }
     to {
         transform: rotate(315deg)
+    }
+}
+
+@keyframes die {
+    0% {
+        opacity: 100%;
+        display: inline;
+    }
+    75% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
     }
 }
