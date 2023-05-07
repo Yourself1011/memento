@@ -1,2 +1,2 @@
-# methhacks
-meth
+# Memento
+⚡ Smarter flashcards, Smarter learning
