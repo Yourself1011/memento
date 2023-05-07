@@ -42,6 +42,7 @@ function SignIn() {
             type="text"
             className="block border-[#ddd] border rounded-[5px] p-4 w-full"
             onChange={e => setUsername(e.target.value)}
+            value={username}
             required
           />
         </label>
@@ -51,6 +52,7 @@ function SignIn() {
             type="email"
             className="block border-[#ddd] border rounded-[5px] p-4 w-full"
             onChange={e => setEmail(e.target.value)}
+            value={email}
             required
           />
         </label>
@@ -60,6 +62,7 @@ function SignIn() {
             type="password"
             className="block border-[#ddd] border rounded-[5px] p-4 w-full"
             onChange={e => setPassword(e.target.value)}
+            value={password}
             required
           />
         </label>
