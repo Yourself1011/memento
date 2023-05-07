@@ -1,9 +1,13 @@
 import User from "../models/Users.ts";
 
-export const authenticate = async ({ username, email, password }: {
-    username: string,
-    email: string,
-    password: string
+export const authenticate = async ({
+  username,
+  email,
+  password,
+}: {
+  username: string;
+  email: string;
+  password: string;
 }) => {
     if ((await User.findOne({ username })).username) {
         console.log("Already exists")
