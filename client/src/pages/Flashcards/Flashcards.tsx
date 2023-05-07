@@ -81,8 +81,8 @@ const Flashcards = () => {
           if (text === "Recalled") {
             console.log("reward");
             reward();
+            setCardsRight(cardsRight + 1);
           }
-          setCardsRight(cardsRight + 1);
         }}
       >
         {text}
