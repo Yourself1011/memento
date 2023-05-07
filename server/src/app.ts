@@ -3,6 +3,8 @@ import express, { Express, Request, Response } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 
+import notFound from '../middlewares/notfound.ts'
+
 const app: Express = express()
 dotenv.config()
 
@@ -12,6 +14,9 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response) => {
     res.json({ 'message': 'Hello World and welcome to the API for Memento!'})
 })
+
+app.get('*', notFound)
+
 
 const port = process.env.SERVER_PORT || 5000
 
