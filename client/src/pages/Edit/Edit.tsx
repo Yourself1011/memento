@@ -69,10 +69,10 @@ const Edit = () => {
             if (!loading) {
               setLoading(true);
               setLoadingMsg("Generating...");
-              const output =
-                "[" +
-                (await generate(text)).generations[0].text.split("[").at(-1);
               try {
+                const output =
+                  "[" +
+                  (await generate(text)).generations[0].text.split("[").at(-1);
                 localStorage.setItem(
                   "cards",
                   JSON.stringify(
@@ -88,7 +88,6 @@ const Edit = () => {
               } catch (err) {
                 setSuccess(false);
                 setLoadingMsg("Error!");
-                console.log(output);
                 console.error(err);
               } finally {
                 setLoading(false);

@@ -4,6 +4,8 @@ import "./Flashcards.scss";
 import { Card } from "../../types/card";
 import { useReward } from "react-rewards";
 
+type Response = "Skip" | "Forgot" | "Recalled";
+
 // const cards: Card[] = [
 //     {
 //         question: 'What is the speed of sound at regular atmospheric pressure and temperature?',
@@ -41,7 +43,9 @@ const Flashcards = () => {
     startVelocity: 20,
   });
 
-  const [currentCard, setCurrentCard] = useState<Card>(cards[0]);
+  const [currentCard, setCurrentCard] = useState<Card>(
+    cards.filter((x) => x.stage >= 0)[0]
+  );
   const [cardsAllCompleted, setCardsAllCompleted] = useState(
     cards === undefined || cards.length === 0
   );
@@ -51,9 +55,11 @@ const Flashcards = () => {
     setCardsDone(cardsDone + 1);
   };
 
-  const handleResponseClick = () => {
+  const handleResponseClick = (text: Response) => {
     const index = cards.findIndex((c) => c.question === currentCard.question)!;
-    cards[index].stage -= 1;
+    const diff = text === "Recalled" ? -1 : text === "Forgot" ? 1 : 0;
+    cards[index].stage += diff;
+    if (cards[index].stage > 3) cards[index].stage = 3;
     cards.push(cards[index]);
     cards.splice(index, 1);
 
@@ -61,7 +67,7 @@ const Flashcards = () => {
 
     const liveCards = cards?.filter((x) => x.stage >= 0);
     const newCard =
-      liveCards?.[Math.floor(Math.random() * liveCards.length * 0.75)];
+      liveCards?.[Math.floor(Math.random() * liveCards.length * 0.5)];
 
     if (!newCard) {
       setCardsAllCompleted(true);
@@ -72,12 +78,12 @@ const Flashcards = () => {
     localStorage.setItem("cards", JSON.stringify(cards));
   };
 
-  const SpacedRepetitionResponse = ({ text }: { text: string }) => {
+  const SpacedRepetitionResponse = ({ text }: { text: Response }) => {
     return (
       <button
         className={`srsresponse ${text}`}
         onClick={() => {
-          handleResponseClick();
+          handleResponseClick(text);
           if (text === "Recalled") {
             console.log("reward");
             reward();
