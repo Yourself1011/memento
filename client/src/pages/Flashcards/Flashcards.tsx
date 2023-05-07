@@ -53,8 +53,7 @@ const Flashcards = () => {
 
   const handleResponseClick = () => {
     const index = cards.findIndex((c) => c.question === currentCard.question)!;
-    const difference = cards[index].stage - 1;
-    cards[index].stage = difference;
+    cards[index].stage -= 1;
     cards.push(cards[index]);
     cards.splice(index, 1);
 
@@ -69,6 +68,8 @@ const Flashcards = () => {
     } else {
       setCurrentCard(newCard);
     }
+
+    localStorage.setItem("cards", JSON.stringify(cards));
   };
 
   const SpacedRepetitionResponse = ({ text }: { text: string }) => {
