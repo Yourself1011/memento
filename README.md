@@ -1,5 +1,7 @@
 # 🧠 Memento
 ⚡ Smarter flashcards, Smarter learning. 🧠
+[Devpost](https://devpost.com/software/memento-horenc)
+[Static hosting](https://memento-flashcards.netlify.app/)
 
 ## 💡Initial Inspiration for the project
 As students and learners, taking notes and studying flashcards is an essential part of studying for tests and remembering information. We wanted to make reviewing notes and flashcards as easy as making them, saving time, effort, and resulting in a better understanding of the material. Memento lets you learn smarter, not harder.
