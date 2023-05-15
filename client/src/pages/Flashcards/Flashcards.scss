@@ -3,10 +3,14 @@
   height: 99svh;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
   align-items: center;
-
+  
   .container {
+    
+    .answer {
+      text-overflow: scroll;
+      overflow-y: hidden;
+    }
     margin-top: 9rem;
     margin-bottom: auto;
     width: 60%;
