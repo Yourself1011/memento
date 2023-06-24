@@ -39,7 +39,7 @@ const Flashcards = () => {
 
   const cards: Card[] = JSON.parse(rawCards);
 
-  const { reward, isAnimating } = useReward("rewardId", "confetti", {
+  const { reward } = useReward("rewardId", "confetti", {
     lifetime: 350,
     elementCount: 40,
     spread: 60,
